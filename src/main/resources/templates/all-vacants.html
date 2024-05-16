@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vacants</title>
+</head>
+<body>
+<div th:each="vacant: ${vacant}">
+    <p th:text="${vacant.job_type}"></p>
+    <!-- Assuming you have a controller method to handle viewing details of a specific job -->
+    <a th:href="@{'/vacants/' + ${vacant.id}}">view</a>
+</div>
+</body>
+</html>
