@@ -1,17 +1,13 @@
 package com.Online_Recruitment_System.web.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.MappedSuperclass;
+import lombok.*;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "user")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@MappedSuperclass
 public abstract class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String username;
     private String password;
-
-    // Getters and setters
 }
-

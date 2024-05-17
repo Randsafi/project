@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Homepage</title>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+</head>
+<body>
+<header>
+  <h1>Welcome to the Online Recruitment System</h1>
+</header>
+<nav>
+  <ul>
+    <li><a th:href="@{/companies}">View Companies</a></li>
+    <li><a th:href="@{/jobseekers}">View Job Seekers</a></li>
+    <li><a th:href="@{/vacants}">View Vacancies</a></li>
+  </ul>
+</nav>
+<section>
+  <p>This is the homepage of the Online Recruitment System.</p>
+</section>
+</body>
+</html>

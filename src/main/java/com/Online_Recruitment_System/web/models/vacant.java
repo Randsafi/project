@@ -1,43 +1,48 @@
 package com.Online_Recruitment_System.web.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "vacant")
 public class vacant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-   @ManyToOne
-   @JoinColumn(name = "company_id")
-   private Company company;
 
-   @ManyToMany
-   @JoinTable(
-           name = "vacant_applicants",
-           joinColumns = @JoinColumn(name = "vacant_id"),
-           inverseJoinColumns = @JoinColumn(name = "regular_user_id")
-   )
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 
-    private String Job_type;
-    @Column(nullable = true, columnDefinition="TEXT")
-    private String Description;
-    private  int Number_years_experience;
-    private String Work_place;
-    private  int Holidays;
+    @ManyToMany
+    @JoinTable(
+            name = "vacant_applicants",
+            joinColumns = @JoinColumn(name = "vacant_id"),
+            inverseJoinColumns = @JoinColumn(name = "job_seeker_id")
+    )
+    private List<JobSeeker> jobSeekers;
 
-    public vacant(Long id, String job_type, String description, int number_years_experience, int holidays, String work_place) {
+    private String jobType;
+    @Column(nullable = true, columnDefinition = "TEXT")
+    private String description;
+    private int numberYearsExperience;
+    private String workPlace;
+    private int holidays;
+
+    public vacant(Long id, Company company, List<JobSeeker> jobSeekers, String jobType, String description, int numberYearsExperience, String workPlace, int holidays) {
         this.id = id;
-        this.Job_type = job_type;
-        this.Description = description;
-        this.Number_years_experience = number_years_experience;
-        this.Holidays = holidays;
-        this.Work_place = work_place;
+        this.company = company;
+        this.jobSeekers = jobSeekers;
+        this.jobType = jobType;
+        this.description = description;
+        this.numberYearsExperience = numberYearsExperience;
+        this.workPlace = workPlace;
+        this.holidays = holidays;
     }
 
     public vacant() {
@@ -51,44 +56,63 @@ public class vacant {
         return id;
     }
 
-
-    public String getJob_type() {
-        return Job_type;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setJob_type(String job_type) {
-        Job_type = job_type;
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public List<JobSeeker> getJobSeekers() {
+        return jobSeekers;
+    }
+
+    public void setJobSeekers(List<JobSeeker> jobSeekers) {
+        this.jobSeekers = jobSeekers;
+    }
+
+    public String getJobType() {
+        return jobType;
+    }
+
+    public void setJobType(String jobType) {
+        this.jobType = jobType;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
+    }
+
+    public int getNumberYearsExperience() {
+        return numberYearsExperience;
+    }
+
+    public void setNumberYearsExperience(int numberYearsExperience) {
+        this.numberYearsExperience = numberYearsExperience;
+    }
+
+    public String getWorkPlace() {
+        return workPlace;
+    }
+
+    public void setWorkPlace(String workPlace) {
+        this.workPlace = workPlace;
     }
 
     public int getHolidays() {
-        return Holidays;
+        return holidays;
     }
 
     public void setHolidays(int holidays) {
-        Holidays = holidays;
-    }
-
-    public int getNumber_years_experience() {
-        return Number_years_experience;
-    }
-
-    public void setNumber_years_experience(int number_years_experience) {
-        Number_years_experience = number_years_experience;
-    }
-
-    public String getWork_place() {
-        return Work_place;
-    }
-
-    public void setWork_place(String work_place) {
-        Work_place = work_place;
+        this.holidays = holidays;
     }
 }

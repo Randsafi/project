@@ -1,7 +1,9 @@
 package com.Online_Recruitment_System.web.models;
+
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 
 @Builder
 @EqualsAndHashCode
@@ -9,37 +11,25 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="JobSeeker")
-
-
-public class JobSeeker extends User{
+@Table(name = "job_seeker")
+public class JobSeeker extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
-    private String password;
     private String fullName;
-    private int YearsOfExperience;
+    private int yearsOfExperience;
     private int age;
     private String country;
     private String workType;
-    private String ExpOFWorkExperiences;
-    private String Phone;
+    private String expOfWorkExperiences;
+    private String phone;
 
-    public JobSeeker(Long id, String username, String password, String fullName, int yearsOfExperience, int age, String country, String workType, String expOFWorkExperiences, String phone) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.fullName = fullName;
-        YearsOfExperience = yearsOfExperience;
-        this.age = age;
-        this.country = country;
-        this.workType = workType;
-        ExpOFWorkExperiences = expOFWorkExperiences;
-        Phone = phone;
-    }
-
-    public JobSeeker() {
-    }
+    @ManyToMany
+    @JoinTable(
+            name = "job_seeker_vacants",
+            joinColumns = @JoinColumn(name = "job_seeker_id"),
+            inverseJoinColumns = @JoinColumn(name = "vacant_id")
+    )
+    private List<vacant> vacants;
 }

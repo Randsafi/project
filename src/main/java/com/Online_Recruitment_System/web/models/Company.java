@@ -1,7 +1,9 @@
 package com.Online_Recruitment_System.web.models;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Builder
 @Data
@@ -9,24 +11,16 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="company")
-
-public class Company extends User{
+@Table(name = "company")
+public class Company extends User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String nameCompany;
-    private String username;
-    private String password;
     private String location;
-    private String workType ;
+    private String workType;
 
-    public Company(String nameCompany, String username, String password, String location, String workType) {
-        this.nameCompany = nameCompany;
-        this.username = username;
-        this.password = password;
-        this.location = location;
-        this.workType = workType;
-    }
-
-    public Company() {
-    }
+    @OneToMany(mappedBy = "company")
+    private List<vacant> vacants;
 }
