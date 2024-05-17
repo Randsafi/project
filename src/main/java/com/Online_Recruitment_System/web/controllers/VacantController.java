@@ -1,6 +1,7 @@
 package com.Online_Recruitment_System.web.controllers;
 
 
+import com.Online_Recruitment_System.web.dtos.FilterVacantDto;
 import com.Online_Recruitment_System.web.models.vacant;
 import com.Online_Recruitment_System.web.services.VacantService;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,12 @@ public class VacantController {
         }
         model.addAttribute("vacant",vacans);
         return "vacant";
+    }
+    public String filterVacant(FilterVacantDto filterV ,Model model){
+        System.out.println(filterV);
+        List<vacant> v = this.vacantservices.filter(filterV);
+        model.addAttribute("vacant",v);
+        return "all-vacants";
     }
 }
 //.getName()

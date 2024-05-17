@@ -5,15 +5,21 @@
     <title>vacant</title>
 </head>
 <body>
-     <p>job type:</p>
+
+<div>
+    <button th:onclick="location.href='#'" type="button">Apply for a job</button>
+</div>
+<div>
+     <p style="color : red;">job type:</p>
     <p th:text="${vacant.job_type}"></p>
-     <p>number years experience</p>
+     <p style="color : red;">number years experience</p>
     <p th:text="${vacant.number_years_experience}"></p>
-     <p>holidays :</p>
+     <p style="color : red;">holidays :</p>
     <p th:text="${vacant.holidays}"></p>
-     <p>work place :</p>
+     <p style="color : red;">work place :</p>
     <p th:text="${vacant.work_place}"></p>
-     <p> discription :</p>
+     <p style="color : red;"> discription :</p>
     <p th:text="${vacant.description}"></p>
+</div>
 </body>
 </html>

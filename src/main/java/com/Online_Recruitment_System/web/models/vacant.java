@@ -13,6 +13,17 @@ public class vacant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+   @ManyToOne
+   @JoinColumn(name = "company_id")
+   private Company company;
+
+   @ManyToMany
+   @JoinTable(
+           name = "vacant_applicants",
+           joinColumns = @JoinColumn(name = "vacant_id"),
+           inverseJoinColumns = @JoinColumn(name = "regular_user_id")
+   )
+
     private String Job_type;
     @Column(nullable = true, columnDefinition="TEXT")
     private String Description;
