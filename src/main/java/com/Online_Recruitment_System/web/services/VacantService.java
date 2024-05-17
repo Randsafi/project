@@ -1,5 +1,6 @@
 package com.Online_Recruitment_System.web.services;
 
+import com.Online_Recruitment_System.web.dtos.CreateVacantDto;
 import com.Online_Recruitment_System.web.dtos.FilterVacantDto;
 import com.Online_Recruitment_System.web.models.vacant;
 import com.Online_Recruitment_System.web.repositories.VacantRepository;
@@ -8,6 +9,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,10 +20,13 @@ import java.util.Optional;
 
 public class VacantService {
     private VacantRepository VacantRepository;
+    private ModelMapper modelMapper;
     private EntityManager em;
 
-    public VacantService(com.Online_Recruitment_System.web.repositories.VacantRepository vacantRepository) {
-        this.VacantRepository = vacantRepository;
+    public VacantService(com.Online_Recruitment_System.web.repositories.VacantRepository vacantRepository, ModelMapper modelMapper, EntityManager em) {
+        VacantRepository = vacantRepository;
+        this.modelMapper = modelMapper;
+        this.em = em;
     }
 
     public List<vacant> getAll(){
@@ -37,6 +42,14 @@ public class VacantService {
         return null;
     }
 
+    public  void create(CreateVacantDto createVacantDto){
+        vacant vacant=new vacant(createVacantDto.namecompany,
+                createVacantDto.jobType,createVacantDto.numberYearsExperience,
+                createVacantDto.workPlace, createVacantDto.holidays
+                );
+        this.VacantRepository.save(vacant);
+    }
+
     public List<vacant> filter(FilterVacantDto filterV) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<vacant> query = criteriaBuilder.createQuery(vacant.class);
@@ -44,6 +57,12 @@ public class VacantService {
         Root<vacant> root = query.from(vacant.class);
 
         List<Predicate> predicates= new ArrayList<Predicate>();
+
+      if (filterV.namecompany.isPresent() && !filterV.namecompany.get().isEmpty())
+          predicates.add(
+                  criteriaBuilder.like(root.get("nameCompany"),
+                          "%" + filterV.namecompany.get() + "%")
+          );
 
         if (filterV.job_type.isPresent() && !filterV.job_type.get().isEmpty())
             predicates.add(
@@ -57,11 +76,7 @@ public class VacantService {
                             "%" + filterV.work_place.get() + "%")
             );
 
-//        if (filterV.number_years_experience.isPresent() && !filterV.number_years_experience.get().isEmpty())
-//            predicates.add(
-//                    criteriaBuilder.like(root.get("number_years_experience"),
-//                            "%" + filterV.number_years_experience.get() + "%")
-//            );
+
 
         query.where(predicates.toArray(new Predicate[predicates.size()]));
 

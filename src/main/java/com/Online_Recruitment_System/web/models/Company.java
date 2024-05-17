@@ -23,4 +23,55 @@ public class Company extends User {
 
     @OneToMany(mappedBy = "company")
     private List<vacant> vacants;
+
+    public Company(Long id, String nameCompany, String location, String workType, List<vacant> vacants) {
+        this.id = id;
+        this.nameCompany = nameCompany;
+        this.location = location;
+        this.workType = workType;
+        this.vacants = vacants;
+    }
+
+    public Company() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNameCompany() {
+        return nameCompany;
+    }
+
+    public void setNameCompany(String nameCompany) {
+        this.nameCompany = nameCompany;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
+    }
+
+    public List<vacant> getVacants() {
+        return vacants;
+    }
+
+    public void setVacants(List<vacant> vacants) {
+        this.vacants = vacants;
+    }
 }

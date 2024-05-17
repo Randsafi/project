@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Builder
@@ -12,9 +13,9 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FilterVacantDto {
-    public Optional<String> job_type;
+    public Optional<String> namecompany ;
 
-//    public Optional<String> ;
+    public Optional<String> job_type;
 
     public Optional<String> work_place;
 

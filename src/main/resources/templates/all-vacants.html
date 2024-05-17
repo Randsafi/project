@@ -5,20 +5,12 @@
     <title>vacants</title>
 </head>
 <body>
-<form method="get" action="/vacants/filter">
-    <label for="name">name company is:</label>
-    <input name="name" type="text" placeholder="enter the name" id="name" />
-    <label for="name">job type:</label>
-    <input name="job type" type="text" placeholder="enter the job type" id="job type" />
-    <label for="name">the company location:</label>
-    <input name="location" type="text" placeholder="enter the location" id="location" />
-    <input type="submit" placeholder="search" />
-</form>
+<a th:href="@/vacants/search">seach</a>
+<a th:href="@{'/vacants/create-vacancy' + ${vacant.id}}">Create</a>
 <div th:each="vacant: ${vacant}">
     <p th:text="${vacant.job_type}"></p>
     <!-- Assuming you have a controller method to handle viewing details of a specific job -->
     <a th:href="@{'/vacants/' + ${vacant.id}}">view</a>
-    <a th:href="@{'/vacants/create' + ${vacant.id}}">Create</a>
     <a th:href="@{'/vacants/update' + ${vacant.id}}">Update</a>
 </div>
 </body>

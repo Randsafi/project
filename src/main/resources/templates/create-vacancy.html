@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Vacancy</title>
+</head>
+<body>
+<h1>Create Vacancy</h1>
+<form th:action="@{/create-vacancy}" th:object="${createVacantDto}" method="post">
+
+    <label for="jobType">name company :</label>
+    <input type="text" id="namecompany" th:field="*{namecompany}">
+
+    <label for="jobType">Job Type:</label>
+    <input type="text" id="jobType" th:field="*{jobType}">
+
+    <label for="numberYearsExperience">Years of Experience:</label>
+    <input type="number" id="numberYearsExperience" th:field="*{numberYearsExperience}">
+
+    <label for="workPlace">Work Place:</label>
+    <input type="text" id="workPlace" th:field="*{workPlace}">
+
+    <label for="holidays">Holidays:</label>
+    <input type="number" id="holidays" th:field="*{holidays}">
+
+    <button type="submit">Create </button>
+</form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Search Vacancies</title>
+</head>
+<body>
+<h1>Search Vacancies</h1>
+<form th:action="@{/search}" method="get">
+  <label for="namecompany">Company Name:</label>
+  <input type="text" id="namecompany" name="namecompany">
+
+  <label for="workPlace">Work Location:</label>
+  <input type="text" id="workPlace" name="workPlace">
+
+  <label for="jobType">Job Type:</label>
+  <input type="text" id="jobType" name="jobType">
+
+  <button type="submit">Search</button>
+</form>
+</body>
+</html>

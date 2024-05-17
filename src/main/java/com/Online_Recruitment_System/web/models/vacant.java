@@ -15,9 +15,15 @@ public class vacant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    private Company company;
+    private String namecompany;
+
+    private String jobType;
+
+    private int numberYearsExperience;
+
+    private String workPlace;
+
+    private int holidays;
 
     @ManyToMany
     @JoinTable(
@@ -27,19 +33,10 @@ public class vacant {
     )
     private List<JobSeeker> jobSeekers;
 
-    private String jobType;
-    @Column(nullable = true, columnDefinition = "TEXT")
-    private String description;
-    private int numberYearsExperience;
-    private String workPlace;
-    private int holidays;
 
-    public vacant(Long id, Company company, List<JobSeeker> jobSeekers, String jobType, String description, int numberYearsExperience, String workPlace, int holidays) {
-        this.id = id;
-        this.company = company;
-        this.jobSeekers = jobSeekers;
+    public vacant(String namecompany, String jobType, int numberYearsExperience, String workPlace, int holidays) {
+        this.namecompany=namecompany;
         this.jobType = jobType;
-        this.description = description;
         this.numberYearsExperience = numberYearsExperience;
         this.workPlace = workPlace;
         this.holidays = holidays;
@@ -60,20 +57,12 @@ public class vacant {
         this.id = id;
     }
 
-    public Company getCompany() {
-        return company;
+    public String getNamecompany() {
+        return namecompany;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public List<JobSeeker> getJobSeekers() {
-        return jobSeekers;
-    }
-
-    public void setJobSeekers(List<JobSeeker> jobSeekers) {
-        this.jobSeekers = jobSeekers;
+    public void setNamecompany(String namecompany) {
+        this.namecompany = namecompany;
     }
 
     public String getJobType() {
@@ -82,14 +71,6 @@ public class vacant {
 
     public void setJobType(String jobType) {
         this.jobType = jobType;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public int getNumberYearsExperience() {
