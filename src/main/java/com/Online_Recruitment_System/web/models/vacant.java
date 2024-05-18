@@ -5,9 +5,6 @@ import lombok.*;
 
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "vacant")
 public class vacant {
@@ -15,15 +12,15 @@ public class vacant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String namecompany;
-
+    private String nameCompany;
     private String jobType;
-
     private int numberYearsExperience;
-
     private String workPlace;
-
     private int holidays;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @ManyToMany
     @JoinTable(
@@ -34,8 +31,8 @@ public class vacant {
     private List<JobSeeker> jobSeekers;
 
 
-    public vacant(String namecompany, String jobType, int numberYearsExperience, String workPlace, int holidays) {
-        this.namecompany=namecompany;
+    public vacant(String nameCompany, String jobType, int numberYearsExperience, String workPlace, int holidays) {
+        this.nameCompany = nameCompany;
         this.jobType = jobType;
         this.numberYearsExperience = numberYearsExperience;
         this.workPlace = workPlace;
@@ -58,11 +55,11 @@ public class vacant {
     }
 
     public String getNamecompany() {
-        return namecompany;
+        return nameCompany;
     }
 
     public void setNamecompany(String namecompany) {
-        this.namecompany = namecompany;
+        this.nameCompany = namecompany;
     }
 
     public String getJobType() {

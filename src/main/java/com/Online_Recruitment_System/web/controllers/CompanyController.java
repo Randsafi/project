@@ -1,7 +1,9 @@
 package com.Online_Recruitment_System.web.controllers;
 
+import com.Online_Recruitment_System.web.dtos.CompanyDto;
 import com.Online_Recruitment_System.web.models.Company;
 import com.Online_Recruitment_System.web.services.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +13,18 @@ import java.util.List;
 @Controller
 @RequestMapping("/companies")
 public class CompanyController {
-    private final CompanyService companyService;
+    @Autowired
+    private CompanyService companyService;
 
-    public CompanyController(CompanyService companyService) {
-        this.companyService = companyService;
+    @PostMapping("/register")
+    @ResponseBody
+    public String saveCompany(CompanyDto companyDto) {
+        Company company=this.companyService.findByNamec(CompanyDto.nameCompany);
+        System.out.println(company);
+        if (company != null)
+            return "redirect:/user/register?nameCompanyError=true";
+        this.companyService.saveCompany(companyDto);
+        return "create-company";
     }
 
 //    @GetMapping
@@ -24,15 +34,5 @@ public class CompanyController {
 //        return "all-companies";
 //    }
 
-    @GetMapping("/create")
-    public String createCompanyForm(Model model) {
-        model.addAttribute("company", new Company());
-        return "create-company";
-    }
 
-    @PostMapping("/create")
-    public String createCompany(@ModelAttribute Company company) {
-        companyService.save(company);
-        return "redirect:/companies";
-    }
 }

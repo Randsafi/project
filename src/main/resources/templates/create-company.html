@@ -7,6 +7,14 @@
 <h1>Create Company</h1>
 <form th:action="@{/companies/create}" th:object="${company}" method="post">
   <div>
+    <label for="username">username:</label>
+    <input type="text" id="username" th:field="*{username}" />
+  </div>
+  <div>
+    <label for="password">password:</label>
+    <input type="text" id="password" th:field="*{password}" />
+  </div>
+  <div>
     <label for="nameCompany">Name:</label>
     <input type="text" id="nameCompany" th:field="*{nameCompany}" />
   </div>

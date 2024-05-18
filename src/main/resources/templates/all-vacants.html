@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>vacants</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
 </head>
 <body>
-<a th:href="@/vacants/search">seach</a>
-<a th:href="@{'/vacants/create-vacancy' + ${vacant.id}}">Create</a>
+
+<a th:href="@{'/vacants/filter'}">Search</a>
+<a th:href="@{'/vacants/create-vacancy'}">Create</a>
+
 <div th:each="vacant: ${vacant}">
     <p th:text="${vacant.job_type}"></p>
     <!-- Assuming you have a controller method to handle viewing details of a specific job -->
     <a th:href="@{'/vacants/' + ${vacant.id}}">view</a>
-    <a th:href="@{'/vacants/update' + ${vacant.id}}">Update</a>
 </div>
+    <a th:href="@{'/vacants/update/' + ${vacant.id}}">Update</a>
 </body>
 </html>

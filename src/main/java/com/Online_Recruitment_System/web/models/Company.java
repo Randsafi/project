@@ -5,11 +5,8 @@ import lombok.*;
 
 import java.util.List;
 
-@Builder
-@Data
-@EqualsAndHashCode
-@AllArgsConstructor
-@NoArgsConstructor
+
+
 @Entity
 @Table(name = "company")
 public class Company extends User {
@@ -21,16 +18,17 @@ public class Company extends User {
     private String location;
     private String workType;
 
-    @OneToMany(mappedBy = "company")
-    private List<vacant> vacants;
+   @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+   private List<vacant> vacants;
 
-    public Company(Long id, String nameCompany, String location, String workType, List<vacant> vacants) {
-        this.id = id;
+    public Company(String username,String email,String password, String nameCompany, String location, String workType, List<vacant> vacants) {
+        super(username,email ,password);
         this.nameCompany = nameCompany;
         this.location = location;
         this.workType = workType;
         this.vacants = vacants;
     }
+
 
     public Company() {
     }

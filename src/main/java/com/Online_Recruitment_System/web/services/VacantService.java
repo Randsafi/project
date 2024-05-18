@@ -10,6 +10,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,14 +20,19 @@ import java.util.Optional;
 @Service
 
 public class VacantService {
-    private VacantRepository VacantRepository;
-    private ModelMapper modelMapper;
+    private final VacantRepository VacantRepository;
+//    private ModelMapper modelMapper;
     private EntityManager em;
 
-    public VacantService(com.Online_Recruitment_System.web.repositories.VacantRepository vacantRepository, ModelMapper modelMapper, EntityManager em) {
+    public VacantService(com.Online_Recruitment_System.web.repositories.VacantRepository vacantRepository, EntityManager em) {
         VacantRepository = vacantRepository;
-        this.modelMapper = modelMapper;
+//        this.modelMapper = modelMapper;      ModelMapper modelMapper,
         this.em = em;
+    }
+
+    @Autowired
+    public VacantService(VacantRepository vacantRepository) {
+        this.VacantRepository = vacantRepository;
     }
 
     public List<vacant> getAll(){
@@ -37,7 +43,7 @@ public class VacantService {
     public vacant getOne(Long id){
         Optional<vacant> vacant = Optional.of(this.VacantRepository.getById(id));
         if (vacant.isPresent())
-        return  vacant.get();
+            return  vacant.get();
 
         return null;
     }
@@ -50,6 +56,8 @@ public class VacantService {
         this.VacantRepository.save(vacant);
     }
 
+//    public List<vacant> getByJobType(String JobType){return this.VacantRepository.findByJobTypeContaining(jobType);}
+
     public List<vacant> filter(FilterVacantDto filterV) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<vacant> query = criteriaBuilder.createQuery(vacant.class);
@@ -60,7 +68,7 @@ public class VacantService {
 
       if (filterV.namecompany.isPresent() && !filterV.namecompany.get().isEmpty())
           predicates.add(
-                  criteriaBuilder.like(root.get("nameCompany"),
+                  criteriaBuilder.like(root.get("namecompany"),
                           "%" + filterV.namecompany.get() + "%")
           );
 

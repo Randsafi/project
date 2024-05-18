@@ -5,20 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
-import java.util.Optional;
-
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FilterVacantDto {
-    public Optional<String> namecompany ;
+public class RegisterDto {
+    public String email;
 
-    public Optional<String> job_type;
+    public String ussername;
 
-    public Optional<String> work_place;
+    public String password;
 
-
-
+    public boolean active;
 }

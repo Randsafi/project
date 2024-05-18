@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <div th:if="${param.emailError}">
+        <p>Email exists</p>
+    </div>
+
+    <form method="post" action="/user/register">
+        <input name="full_name" type="text" placeholder="enter the full name" />
+        <input name="email" type="text" placeholder="enter the email" />
+        <input name="password" type="text" placeholder="enter the password" />
+        <input type="submit" />
+    </form>
+
+</body>
+</html>

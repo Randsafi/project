@@ -8,11 +8,12 @@ import java.util.List;
 
 @Service
 public class JobSeekerService {
-    private final JobSeekerRepository jobSeekerRepository;
+    private JobSeekerRepository jobSeekerRepository;
 
-    public JobSeekerService(JobSeekerRepository jobSeekerRepository) {
-        this.jobSeekerRepository = jobSeekerRepository;
+    public JobSeeker saveJobSeeker(JobSeeker jobSeeker){
+        return jobSeekerRepository.save(jobSeeker);
     }
+
 
     public List<JobSeeker> getAll() {
         return jobSeekerRepository.findAll();

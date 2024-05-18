@@ -5,17 +5,42 @@
 </head>
 <body>
 <h1>Search Vacancies</h1>
-<form th:action="@{/search}" method="get">
-  <label for="namecompany">Company Name:</label>
-  <input type="text" id="namecompany" name="namecompany">
+<form method="get" action="/vacants/filter">
+
+  <label for="nameCompany">Name Company :</label>
+  <input type="text" id="nameCompany" name="nameCompany">
 
   <label for="workPlace">Work Location:</label>
   <input type="text" id="workPlace" name="workPlace">
-
+  <br>
   <label for="jobType">Job Type:</label>
   <input type="text" id="jobType" name="jobType">
 
   <button type="submit">Search</button>
 </form>
+<h1>Search Results</h1>
+<div th:if="${vacancies.isEmpty()}">
+  <p>No vacancies found.</p>
+</div>
+<div th:if="${!vacancies.isEmpty()}">
+  <table>
+    <thead>
+    <tr>
+      <th>Company Name</th>
+      <th>Work Location</th>
+      <th>Job Type</th>
+      <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vacant : ${vacancies}">
+      <td th:text="${vacant.company.nameCompany}">Company Name</td>
+      <td th:text="${vacant.workPlace}">Work Location</td>
+      <td th:text="${vacant.jobType}">Job Type</td>
+      <td th:text="${vacant.description}">Description</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 </body>
 </html>

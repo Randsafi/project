@@ -23,28 +23,30 @@ public class VacantController {
         this.vacantservices = vacantservices;
     }
 
+
     @GetMapping("/all")
     public String getAllVacants(Model model){
-        List<vacant> vacant = this.vacantservices.getAll() ;
+        List<vacant> vacant;
+        vacant = this.vacantservices.getAll();
 
         model.addAttribute("vacant",vacant);
 
-       return "all-vacants";
+        return "all-vacants";
     }
 
     @GetMapping("/{id}")
     public String getOneVacant(Model model,@PathVariable("id") Long id){
         vacant vacans = this.vacantservices.getOne(id) ;
 
-        if (vacans != null){
-            model.addAttribute("vacant",vacans);
+        if (vacans == null){
 
-            return "vacant";
+            return "not-found";
         }
+        model.addAttribute("vacant",vacans);
+        return "vacant";
+    }
 
-        return "not-found";
-
-    }@GetMapping("/create-vacancy")
+    @GetMapping("/create-vacancy")
     public String createVacancy() {
 
         return "create-vacancy";
@@ -55,12 +57,13 @@ public class VacantController {
         vacantservices.create(createVacantDto);
         return "redirect:/all-vacants";
     }
-    @GetMapping("/search")
-    public String filterVacant(FilterVacantDto filterV ,Model model){
+    @GetMapping("/filter")
+    public String filterVacant(FilterVacantDto filterV, Model model) {
         System.out.println(filterV);
         List<vacant> v = this.vacantservices.filter(filterV);
-        model.addAttribute("vacant",v);
+        model.addAttribute("vacants", v);  // Changed to "vacants" for consistency
         return "search-form";
     }
+
 }
 //.getName()
