@@ -6,15 +6,21 @@
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
 </head>
 <body>
+<header>
+    <h1>Welcome to the Online Recruitment System</h1>
+</header>
 
 <a th:href="@{'/vacants/filter'}">Search</a>
 <a th:href="@{'/vacants/create-vacancy'}">Create</a>
 
-<div th:each="vacant: ${vacant}">
-    <p th:text="${vacant.job_type}"></p>
-    <!-- Assuming you have a controller method to handle viewing details of a specific job -->
-    <a th:href="@{'/vacants/' + ${vacant.id}}">view</a>
-</div>
+<!-- Make sure to use the correct attribute name for the collection of vacants -->
+<div th:each="vacant : ${vacants}">
+    <!-- Access the name field of the associated Company entity -->
+<!--    <p th:text="${vacant.company.name}">Company Name</p>-->
+    <p th:text="${vacant.jobType}">Job Type</p>
+    <a th:href="@{'/vacants/' + ${vacant.id}}">View</a>
     <a th:href="@{'/vacants/update/' + ${vacant.id}}">Update</a>
+</div>
+
 </body>
 </html>

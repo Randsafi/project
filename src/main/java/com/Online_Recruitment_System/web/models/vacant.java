@@ -11,13 +11,10 @@ public class vacant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String nameCompany;
     private String jobType;
     private int numberYearsExperience;
     private String workPlace;
     private int holidays;
-
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
@@ -31,8 +28,8 @@ public class vacant {
     private List<JobSeeker> jobSeekers;
 
 
-    public vacant(String nameCompany, String jobType, int numberYearsExperience, String workPlace, int holidays) {
-        this.nameCompany = nameCompany;
+    public vacant( String jobType, int numberYearsExperience, String workPlace, int holidays) {
+//        this.nameCompany = nameCompany;   String nameCompany,
         this.jobType = jobType;
         this.numberYearsExperience = numberYearsExperience;
         this.workPlace = workPlace;
@@ -54,12 +51,29 @@ public class vacant {
         this.id = id;
     }
 
-    public String getNamecompany() {
-        return nameCompany;
+//    public String getNamecompany() {
+//        return nameCompany;
+//    }
+//
+//    public void setNamecompany(String namecompany) {
+//        this.nameCompany = namecompany;
+//    }
+
+
+    public Company getCompany() {
+        return company;
     }
 
-    public void setNamecompany(String namecompany) {
-        this.nameCompany = namecompany;
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public List<JobSeeker> getJobSeekers() {
+        return jobSeekers;
+    }
+
+    public void setJobSeekers(List<JobSeeker> jobSeekers) {
+        this.jobSeekers = jobSeekers;
     }
 
     public String getJobType() {

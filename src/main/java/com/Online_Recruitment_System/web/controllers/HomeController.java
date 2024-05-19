@@ -12,4 +12,8 @@ public class HomeController {
         // Add any attributes to the model if necessary
         return "home";
     }
+    public String ask(Model model){
+        return "ask";
+    }
+
 }

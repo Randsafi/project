@@ -12,8 +12,8 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private boolean active;
-
+//    private boolean active;
+    private String role;
     public User(String username,String email ,String password) {
         this.username = username;
         this.email=email;
@@ -55,11 +55,11 @@ public class User {
         this.password = password;
     }
 
-    public boolean isActive() {
-        return active;
+    public String getRole() {
+        return role;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

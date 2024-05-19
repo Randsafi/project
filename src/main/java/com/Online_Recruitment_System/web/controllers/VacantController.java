@@ -3,8 +3,10 @@ package com.Online_Recruitment_System.web.controllers;
 
 import com.Online_Recruitment_System.web.dtos.CreateVacantDto;
 import com.Online_Recruitment_System.web.dtos.FilterVacantDto;
+import com.Online_Recruitment_System.web.dtos.UpdateVacantDto;
 import com.Online_Recruitment_System.web.models.vacant;
 import com.Online_Recruitment_System.web.services.VacantService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +18,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/vacants")
 public class VacantController {
-
     private VacantService vacantservices;
 
+    @Autowired
     public VacantController(VacantService vacantservices) {
         this.vacantservices = vacantservices;
     }
@@ -47,16 +49,17 @@ public class VacantController {
     }
 
     @GetMapping("/create-vacancy")
-    public String createVacancy() {
+    public String createVacancyForm() {
 
         return "create-vacancy";
     }
 
     @PostMapping("/create-vacancy")
-    public String getcreateVacancy(@ModelAttribute CreateVacantDto createVacantDto, @RequestParam Long companyId) {
-        vacantservices.create(createVacantDto);
-        return "redirect:/all-vacants";
+    public String createVacancy(CreateVacantDto createVacantDto) {
+        this.vacantservices.create(createVacantDto);
+        return "redirect:/vacants";
     }
+
     @GetMapping("/filter")
     public String filterVacant(FilterVacantDto filterV, Model model) {
         System.out.println(filterV);
@@ -64,6 +67,27 @@ public class VacantController {
         model.addAttribute("vacants", v);  // Changed to "vacants" for consistency
         return "search-form";
     }
+    @GetMapping("/update/{id}")
+    public String getUpdateCompany(@PathVariable("id") Long id, Model  model) {
+        vacant vacant = this.vacantservices.getOne(id);
 
+        model.addAttribute("vacant", vacant);
+
+        return "update-vacant";
+    }
+    @PostMapping("/update/{id}")
+    public String updateVacant(UpdateVacantDto updateVacantDto,
+                               @PathVariable("id") Long id) {
+
+        this.vacantservices.update(id, updateVacantDto);
+
+        return "redirect:/vacants/all";
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteVacant(@PathVariable("id") Long id) {
+        this.vacantservices.delete(id);
+
+        return "redirect:/vacants/all";
+    }
 }
 //.getName()

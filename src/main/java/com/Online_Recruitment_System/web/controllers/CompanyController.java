@@ -17,9 +17,8 @@ public class CompanyController {
     private CompanyService companyService;
 
     @PostMapping("/register")
-    @ResponseBody
     public String saveCompany(CompanyDto companyDto) {
-        Company company=this.companyService.findByNamec(CompanyDto.nameCompany);
+        Company company=this.companyService.findByName(CompanyDto.name);
         System.out.println(company);
         if (company != null)
             return "redirect:/user/register?nameCompanyError=true";

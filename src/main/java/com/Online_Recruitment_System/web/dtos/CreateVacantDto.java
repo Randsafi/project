@@ -11,15 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateVacantDto {
-    public String namecompany;
-
     public String jobType;
-
     public String description;
-
     public int numberYearsExperience;
-
     public String workPlace;
-
     public int holidays;
 }

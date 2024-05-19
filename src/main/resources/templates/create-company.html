@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Create Company</title>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
 </head>
 <body>
 <h1>Create Company</h1>
@@ -28,5 +30,6 @@
   </div>
   <button type="submit">Create</button>
 </form>
+<a th:href="@{'/vacants/all'}">next</a>
 </body>
 </html>

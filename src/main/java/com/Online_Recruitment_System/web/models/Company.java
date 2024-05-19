@@ -14,16 +14,16 @@ public class Company extends User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nameCompany;
+    private String name;
     private String location;
     private String workType;
 
    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
    private List<vacant> vacants;
 
-    public Company(String username,String email,String password, String nameCompany, String location, String workType, List<vacant> vacants) {
+    public Company(String username,String email,String password, String name, String location, String workType, List<vacant> vacants) {
         super(username,email ,password);
-        this.nameCompany = nameCompany;
+        this.name = name;
         this.location = location;
         this.workType = workType;
         this.vacants = vacants;
@@ -41,12 +41,12 @@ public class Company extends User {
         this.id = id;
     }
 
-    public String getNameCompany() {
-        return nameCompany;
+    public String getName() {
+        return name;
     }
 
-    public void setNameCompany(String nameCompany) {
-        this.nameCompany = nameCompany;
+    public void setName(String nameCompany) {
+        this.name = nameCompany;
     }
 
     public String getLocation() {

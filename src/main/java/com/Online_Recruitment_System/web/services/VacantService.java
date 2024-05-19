@@ -2,6 +2,7 @@ package com.Online_Recruitment_System.web.services;
 
 import com.Online_Recruitment_System.web.dtos.CreateVacantDto;
 import com.Online_Recruitment_System.web.dtos.FilterVacantDto;
+import com.Online_Recruitment_System.web.dtos.UpdateVacantDto;
 import com.Online_Recruitment_System.web.models.vacant;
 import com.Online_Recruitment_System.web.repositories.VacantRepository;
 import jakarta.persistence.EntityManager;
@@ -21,7 +22,7 @@ import java.util.Optional;
 
 public class VacantService {
     private final VacantRepository VacantRepository;
-//    private ModelMapper modelMapper;
+    private ModelMapper modelMapper;
     private EntityManager em;
 
     public VacantService(com.Online_Recruitment_System.web.repositories.VacantRepository vacantRepository, EntityManager em) {
@@ -48,10 +49,12 @@ public class VacantService {
         return null;
     }
 
-    public  void create(CreateVacantDto createVacantDto){
-        vacant vacant=new vacant(createVacantDto.namecompany,
-                createVacantDto.jobType,createVacantDto.numberYearsExperience,
-                createVacantDto.workPlace, createVacantDto.holidays
+    public  void create(CreateVacantDto createVacantDto){//createVacantDto.namecompany,
+        vacant vacant=new vacant(
+                createVacantDto.jobType,
+                createVacantDto.numberYearsExperience,
+                createVacantDto.workPlace,
+                createVacantDto.holidays
                 );
         this.VacantRepository.save(vacant);
     }
@@ -90,5 +93,15 @@ public class VacantService {
 
         return em.createQuery(query).getResultList();
 
+    }
+
+    public void update(Long id, UpdateVacantDto updateVacantDto) {
+        vacant vacant=this.modelMapper.map(updateVacantDto,vacant.class);
+        vacant.setId(id);
+        this.VacantRepository.save(vacant);
+    }
+
+    public void delete(Long id) {
+        this.VacantRepository.deleteById(id);
     }
 }

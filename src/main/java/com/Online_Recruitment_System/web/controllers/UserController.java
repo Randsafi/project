@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
 
     private UserService userService;
@@ -41,13 +41,11 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping("/{username}")
-    public User getUserByUsername(@PathVariable String username) {
-        return userService.findByUsername(username);
-    }
 
-    @GetMapping("/login")
+//    @GetMapping("/login")
+    @PostMapping("/login")
     public String getLoin(){
+        System.out.println("hello");
         return "login";
     }
 }

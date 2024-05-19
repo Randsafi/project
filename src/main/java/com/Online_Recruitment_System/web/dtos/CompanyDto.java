@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CompanyDto {
 
-    public static String nameCompany;
+    public static String name;
     public String location;
     public String workType;
 
